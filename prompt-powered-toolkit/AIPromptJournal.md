@@ -3,7 +3,7 @@
 #### Prompt #1
 
 **Prompt used:**
-`What is an API wrapper and what problems does it solve?`
+```What is an API wrapper and what problems does it solve?```
 **AI Response Summary:**
 
 ```claude
@@ -11,7 +11,7 @@ An API wrapper is a layer of code that sits between your application and an exte
 Instead of writing this every time you want to make a request:
 ```
 
-`
+```
 import requests
 
 response = requests.post(
@@ -23,10 +23,9 @@ data = response.json()
 `A wrapper lets you write this:`
 client = ExampleClient(api_key="sk-...")
 message = client.messages.create(model="gpt-4", content="Hello")
-`
-
 ```
 Problems It Solves
+```
 1. Reduces Boilerplate
 Raw API calls require repetitive setup — headers, base URLs, serialization, deserialization. A wrapper does all of that once, so every call in your codebase stays concise.
 2. Handles Errors Gracefully
