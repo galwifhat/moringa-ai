@@ -230,12 +230,13 @@ User-Facing Output
 **The backend and frontend are both configured and running without issues.**
 Backend: Python Flask
 Frontend: React + Vite + TailwindCSS
+
 _no need to prompt this_
 
 #### Prompt #2(setup)
 
 **Prompt used:**
-`How can I improve the project structure of a Flask backend and ReactJS (Vite + Tailwind) frontend app that uses the OpenRouter API? Please suggest a scalable folder structure, best practices, and how to organize API calls.`
+```How can I improve the project structure of a Flask backend and ReactJS (Vite + Tailwind) frontend app that uses the OpenRouter API? Please suggest a scalable folder structure, best practices, and how to organize API calls.```
 
 **AI Response Summary:**
 
