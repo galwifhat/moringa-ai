@@ -234,6 +234,7 @@ _no need to prompt this_
 
 **Prompt used:**
 `How can I improve the project structure of a Flask backend and ReactJS (Vite + Tailwind) frontend app that uses the OpenRouter API? Please suggest a scalable folder structure, best practices, and how to organize API calls.`
+
 **AI Response Summary:**
 
 ```
