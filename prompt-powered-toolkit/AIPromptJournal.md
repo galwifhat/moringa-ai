@@ -48,13 +48,13 @@ Think of a raw API like driving a car with a manual gear box, clutch, and no pow
 **How it helped:**
 
 ```
-Understand that there are better way to handle api calls
+Understand that there are better ways to handle api calls
 ```
 
 **Challenges:**
 
 ```
-
+None from this prompt
 ```
 
 #### Prompt #2
