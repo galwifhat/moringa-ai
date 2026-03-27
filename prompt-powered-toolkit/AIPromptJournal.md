@@ -4,6 +4,7 @@
 
 **Prompt used:**
 ```What is an API wrapper and what problems does it solve?```
+
 **AI Response Summary:**
 
 ```claude
