@@ -16,6 +16,7 @@ sqlalchemy-serializer = "*"
 sqlalchemy = "*"
 requests = "*"
 httpx = "==0.25.0"
+gunicorn = "*"
 
 [dev-packages]
 
