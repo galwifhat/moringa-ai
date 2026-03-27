@@ -1,12 +1,15 @@
-import { useState } from "react";
-
-import "./App.css";
+// src/App.jsx
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ChatPage from "@/pages/ChatPage";
 
 function App() {
   return (
-    <>
-      <div>Hello</div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/chat" replace />} />
+        <Route path="/chat" element={<ChatPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

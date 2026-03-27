@@ -1,20 +1,37 @@
-├── package-lock.json
-├── package.json
-├── public
-│ ├── favicon.svg
-│ └── icons.svg
-├── src
-│ ├── App.jsx
-│ ├── assets
-│ ├── components
-│ │ └── ui
-│ │ └── button.jsx
-│ ├── index.css
-│ ├── lib
-│ │ └── utils.js
-│ └── main.jsx
-├── tailwind.config.js
-└── vite.config.js
+frontend/
+├── public/
+├── src/
+│   ├── api/                     # All API call logic lives here
+│   │   ├── axiosClient.js       # Axios instance with base URL + interceptors
+│   │   ├── journalApi.js        # Journal-specific API calls
+│   │   └── aiApi.js             # AI/OpenRouter-specific API calls
+│   │
+│   ├── components/              # Reusable, dumb UI components
+│   │   ├── ui/                  # Primitives: Button, Input, Modal
+│   │   └── journal/             # Domain-specific: JournalCard, EntryForm
+│   │
+│   ├── pages/                   # Route-level components
+│   │   ├── HomePage.jsx
+│   │   ├── JournalPage.jsx
+│   │   └── SettingsPage.jsx
+│   │
+│   ├── hooks/                   # Custom React hooks
+│   │   ├── useJournal.js        # Data fetching + state for journal
+│   │   └── useAIStream.js       # Handles SSE streaming from OpenRouter
+│   │
+│   ├── context/                 # Global state (Auth, Theme)
+│   │   └── AuthContext.jsx
+│   │
+│   ├── utils/                   # Pure helper functions
+│   │   └── formatDate.js
+│   │
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+│
+├── .env                         # VITE_API_BASE_URL etc.
+├── vite.config.js
+└── tailwind.config.js
 
 
 ### AI Prompt Plan
