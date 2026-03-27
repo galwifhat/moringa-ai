@@ -19,9 +19,10 @@ def stream():
 
     return Response(
         stream_with_context(generate()),
-        mimetype="text/plain",
+        mimetype="text/event-stream",  # Change from text/plain
         headers={
             "Cache-Control": "no-cache",
             "X-Accel-Buffering": "no",
+            "Connection": "keep-alive",
         },
     )
