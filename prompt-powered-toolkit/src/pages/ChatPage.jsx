@@ -52,7 +52,7 @@ export default function ChatPage() {
               {isStreaming ? (
                 <span className="text-primary">Typing…</span>
               ) : (
-                "OpenRouter · llama-3.1-8b-instruct"
+                "OpenRouter · AI"
               )}
             </p>
           </div>

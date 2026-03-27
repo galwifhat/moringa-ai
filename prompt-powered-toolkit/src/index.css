@@ -6,7 +6,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     /* Black & White Theme */
@@ -91,7 +90,6 @@
 @layer base {
   * {
     box-sizing: border-box;
-    border: 1px solid var(--border);
   }
 
   body {

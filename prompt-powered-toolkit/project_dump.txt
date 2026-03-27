@@ -1,5 +1,10 @@
 
 ====================================================
+FILE: ./.env
+====================================================
+VITE_API_BASE_URL=http://127.0.0.1:5000
+
+====================================================
 FILE: ./.gitignore
 ====================================================
 # Logs
@@ -35,7 +40,8 @@ FILE: ./AIPromptJournal.md
 #### Prompt #1
 
 **Prompt used:**
-`What is an API wrapper and what problems does it solve?`
+```What is an API wrapper and what problems does it solve?```
+
 **AI Response Summary:**
 
 ```claude
@@ -43,7 +49,7 @@ An API wrapper is a layer of code that sits between your application and an exte
 Instead of writing this every time you want to make a request:
 ```
 
-`
+```
 import requests
 
 response = requests.post(
@@ -55,10 +61,9 @@ data = response.json()
 `A wrapper lets you write this:`
 client = ExampleClient(api_key="sk-...")
 message = client.messages.create(model="gpt-4", content="Hello")
-`
-
 ```
 Problems It Solves
+```
 1. Reduces Boilerplate
 Raw API calls require repetitive setup — headers, base URLs, serialization, deserialization. A wrapper does all of that once, so every call in your codebase stays concise.
 2. Handles Errors Gracefully
@@ -81,13 +86,13 @@ Think of a raw API like driving a car with a manual gear box, clutch, and no pow
 **How it helped:**
 
 ```
-Understand that there are better way to handle api calls
+Understand that there are better ways to handle api calls
 ```
 
 **Challenges:**
 
 ```
-
+None from this prompt
 ```
 
 #### Prompt #2
@@ -162,11 +167,11 @@ Response structure:
   "usage": { "prompt_tokens": 20, "completion_tokens": 10 }
 }
 ```
-
+```
 **Streaming:** OpenRouter supports Server-Sent Events (SSE) — you'll need to handle chunked responses if you want real-time output.
-
+```
 ---
-
+```
 ### 6. **Good-to-Have Knowledge**
 
 - **Retry logic** — handling `429 Rate Limited` and `5xx` server errors with exponential backoff
@@ -175,7 +180,7 @@ Response structure:
 - **OpenAI SDK familiarity** — since OpenRouter mirrors the OpenAI spec, reading the OpenAI docs is directly useful
 
 ---
-
+```
 ### Quick Readiness Checklist
 
 ```
@@ -205,7 +210,9 @@ I am not too familiar with streaming/sse
 #### Prompt #3
 
 **Prompt used:**
-`What is an API wrapper and what problems does it solve?`
+```Show me 5 real-world applications that use API wrappers for AI services?```
+
+
 **AI Response Summary:**
 
 ```
@@ -260,17 +267,18 @@ User-Facing Output
 **The backend and frontend are both configured and running without issues.**
 Backend: Python Flask
 Frontend: React + Vite + TailwindCSS
+
 _no need to prompt this_
 
 #### Prompt #2(setup)
 
 **Prompt used:**
-`How can I improve the project structure of a Flask backend and ReactJS (Vite + Tailwind) frontend app that uses the OpenRouter API? Please suggest a scalable folder structure, best practices, and how to organize API calls.`
+```How can I improve the project structure of a Flask backend and ReactJS (Vite + Tailwind) frontend app that uses the OpenRouter API? Please suggest a scalable folder structure, best practices, and how to organize API calls.```
+
 **AI Response Summary:**
 
 ```
-Best Practices Summary
-![Best Practices Summary](image.png)
+![Best Practices Summary](/best-practices.png)
 ```
 
 **How it helped:**
@@ -284,7 +292,37 @@ Helped me understand api versioning.
 ```
 
 ```
+### Phase 3 & 4 - Building and Debugging Prompts
 
+#### Prompt #1 (debug)
+Promt 1
+```
+“My AI chat integration isn’t returning responses. Please help me debug it.
+
+- Check how messages are being sent from the frontend.
+- Verify if the backend receives them correctly.
+- Confirm whether the AI model is receiving the messages and generating a response.
+- Identify any possible issues in request/response handling or configuration.”
+
+```
+
+**AI Response Summary:**
+
+```
+
+```
+
+**How it helped:**
+
+```
+
+```
+
+**Challenges:**
+
+```
+
+```
 ====================================================
 FILE: ./README.md
 ====================================================
@@ -347,8 +385,21 @@ Include all installation commands and a requirements.txt file"
 
 Prompt 2 (Structure):
 "What's the minimal project structure for a Flask + React app? Show me folder organization."
+
 Prompt 3 (Common Mistakes):
 "What common configuration mistakes should I avoid when setting up Flask with CORS for React?"
+
+
+### Phase 3 & 4 - Building and Debugging Prompts
+Promt 1
+
+“My AI chat integration isn’t returning responses. Please help me debug it.
+
+- Check how messages are being sent from the frontend.
+- Verify if the backend receives them correctly.
+- Confirm whether the AI model is receiving the messages and generating a response.
+- Identify any possible issues in request/response handling or configuration.”
+
 
 ====================================================
 FILE: ./components.json
@@ -432,14 +483,15 @@ FILE: ./index.html
 ====================================================
 FILE: ./jsconfig.json
 ====================================================
- {
-    "compilerOptions": {
+{
+ "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   }
 }
+
 ====================================================
 FILE: ./package.json
 ====================================================
@@ -457,7 +509,7 @@ FILE: ./package.json
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.8",
     "@reduxjs/toolkit": "^2.11.2",
-    "@tailwindcss/vite": "^4.2.2",
+    "@shadcn/ui": "^0.0.4",
     "axios": "^1.13.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -479,13 +531,25 @@ FILE: ./package.json
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.4.27",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "postcss": "^8.5.8",
     "tailwindcss": "^3.4.19",
     "vite": "^8.0.1"
   }
+}
+
+====================================================
+FILE: ./postcss.config.js
+====================================================
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
 }
 
 ====================================================
@@ -543,7 +607,6 @@ axiosClient.interceptors.response.use(
 
 export default axiosClient;
 
-
 ====================================================
 FILE: ./src/components/chat/ChatInput.jsx
 ====================================================
@@ -560,7 +623,6 @@ export default function ChatInput({ onSend, disabled }) {
     if (!text || disabled) return;
     onSend(text);
     setValue("");
-    // Reset height
     if (ref.current) ref.current.style.height = "auto";
     ref.current?.focus();
   };
@@ -573,23 +635,13 @@ export default function ChatInput({ onSend, disabled }) {
   };
 
   const handleInput = (e) => {
-    // Auto-grow up to 8 lines
     e.target.style.height = "auto";
-    e.target.style.height = Math.min(e.target.scrollHeight, 192) + "px";
+    e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
   };
 
   return (
-    <div
-      className="px-6 py-4 border-t shrink-0"
-      style={{ borderColor: "rgba(255,255,255,0.08)" }}
-    >
-      <div
-        className="flex items-end gap-3 px-4 py-3 rounded-2xl border transition-colors focus-within:border-purple-500/50"
-        style={{
-          background: "#1E2633",
-          borderColor: "rgba(255,255,255,0.1)",
-        }}
-      >
+    <div className="px-6 py-4 border-t bg-background">
+      <div className="flex items-end gap-3 px-4 py-3 rounded-2xl border bg-muted/30">
         <textarea
           ref={ref}
           value={value}
@@ -599,29 +651,25 @@ export default function ChatInput({ onSend, disabled }) {
           placeholder="Message… (Enter to send, Shift+Enter for new line)"
           rows={1}
           disabled={disabled}
-          className="flex-1 resize-none bg-transparent text-sm text-white placeholder:text-gray-500 outline-none"
-          style={{ lineHeight: "1.6", minHeight: "22px", maxHeight: "192px" }}
+          className="flex-1 resize-none bg-transparent text-foreground placeholder:text-muted-foreground outline-none"
+          style={{ lineHeight: "1.5", minHeight: "24px", maxHeight: "120px" }}
         />
 
         <button
           onClick={handleSend}
           disabled={disabled || !value.trim()}
-          className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all disabled:opacity-35 hover:opacity-85 active:scale-95"
-          style={{ background: "#8B5CF6" }}
+          className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shrink-0 transition-all disabled:opacity-50 hover:bg-primary/90 active:scale-95"
           aria-label="Send message"
         >
           {disabled ? (
-            <Loader2 size={14} className="text-white animate-spin" />
+            <Loader2 size={14} className="animate-spin" />
           ) : (
-            <Send size={14} className="text-white" />
+            <Send size={14} />
           )}
         </button>
       </div>
 
-      <p
-        className="text-center text-xs mt-2"
-        style={{ color: "rgba(255,255,255,0.18)" }}
-      >
+      <p className="text-center text-xs mt-2 text-muted-foreground">
         AI responses may be inaccurate. Verify important information.
       </p>
     </div>
@@ -633,40 +681,39 @@ FILE: ./src/components/chat/MessageBubble.jsx
 ====================================================
 // src/components/chat/MessageBubble.jsx
 import { Bot, User } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function MessageBubble({ role, content, streaming = false }) {
   const isUser = role === "user";
 
   return (
-    <div
-      className={`flex gap-3 items-end ${isUser ? "flex-row-reverse" : "flex-row"}`}
-    >
+    <div className={cn("flex gap-3", isUser ? "justify-end" : "justify-start")}>
       {/* Avatar */}
       <div
-        className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
-        style={{ background: isUser ? "#3B82F6" : "#222C3A" }}
+        className={cn(
+          "w-8 h-8 rounded-full flex items-center justify-center shrink-0",
+          isUser ? "bg-primary order-2" : "bg-secondary order-1",
+        )}
       >
         {isUser ? (
-          <User size={13} className="text-white" />
+          <User size={14} className="text-primary-foreground" />
         ) : (
-          <Bot size={13} style={{ color: "#8B5CF6" }} />
+          <Bot size={14} className="text-secondary-foreground" />
         )}
       </div>
 
       {/* Bubble */}
       <div
-        className="max-w-[72%] px-4 py-2.5 text-sm leading-relaxed text-white whitespace-pre-wrap break-words"
-        style={{
-          background: isUser ? "#3B82F6" : "#222C3A",
-          borderRadius: isUser ? "18px 4px 18px 18px" : "4px 18px 18px 18px",
-        }}
+        className={cn(
+          "max-w-[70%] px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap break-words",
+          isUser
+            ? "bg-primary text-primary-foreground rounded-2xl rounded-tr-sm order-1"
+            : "bg-secondary text-secondary-foreground rounded-2xl rounded-tl-sm order-2",
+        )}
       >
         {content}
         {streaming && (
-          <span
-            className="inline-block w-1.5 h-3.5 ml-0.5 rounded-sm align-middle animate-pulse"
-            style={{ background: "#8B5CF6" }}
-          />
+          <span className="inline-block w-1.5 h-4 ml-0.5 rounded-sm align-middle animate-pulse bg-current" />
         )}
       </div>
     </div>
@@ -678,6 +725,7 @@ FILE: ./src/components/chat/Sidebar.jsx
 ====================================================
 // src/components/chat/Sidebar.jsx
 import { Plus, MessageSquare, Trash2, Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function Sidebar({
   conversations,
@@ -687,44 +735,29 @@ export default function Sidebar({
   onDelete,
 }) {
   return (
-    <aside
-      className="w-60 flex flex-col h-full border-r shrink-0"
-      style={{
-        background: "#1E2633",
-        borderColor: "rgba(255,255,255,0.08)",
-      }}
-    >
+    <aside className="w-64 flex flex-col h-full border-r bg-sidebar">
       {/* Brand */}
-      <div className="px-4 pt-5 pb-4">
-        <div className="flex items-center gap-2.5 mb-5">
-          <div
-            className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
-            style={{ background: "#8B5CF6" }}
-          >
-            <Sparkles size={15} className="text-white" />
+      <div className="px-4 pt-6 pb-4">
+        <div className="flex items-center gap-2.5 mb-6">
+          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+            <Sparkles size={16} className="text-primary-foreground" />
           </div>
-          <span className="text-white font-semibold text-sm tracking-tight">
-            ChatRouter
-          </span>
+          <span className="font-semibold text-foreground">AI Toolkit</span>
         </div>
 
         {/* New Chat button */}
         <button
           onClick={onNew}
-          className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-white transition-opacity hover:opacity-85 active:scale-[0.98]"
-          style={{ background: "#8B5CF6" }}
+          className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-medium text-sm"
         >
-          <Plus size={15} />
+          <Plus size={16} />
           New Chat
         </button>
       </div>
 
       {/* Conversation list */}
-      <div className="flex-1 overflow-y-auto px-3 space-y-0.5 pb-4">
-        <p
-          className="text-xs px-2 mb-2 font-medium uppercase tracking-widest"
-          style={{ color: "rgba(255,255,255,0.28)" }}
-        >
+      <div className="flex-1 overflow-y-auto px-3 space-y-1 pb-4">
+        <p className="text-xs px-2 mb-2 font-medium uppercase tracking-wider text-muted-foreground">
           History
         </p>
 
@@ -734,38 +767,23 @@ export default function Sidebar({
             <div
               key={conv.id}
               onClick={() => onSelect(conv.id)}
-              className="group flex items-center gap-2 px-3 py-2.5 rounded-xl cursor-pointer transition-colors"
-              style={{
-                background: isActive ? "rgba(255,255,255,0.07)" : "transparent",
-              }}
+              className={cn(
+                "group flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer transition-all",
+                isActive
+                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                  : "hover:bg-sidebar-accent/50 text-muted-foreground",
+              )}
             >
-              <MessageSquare
-                size={13}
-                className="shrink-0"
-                style={{
-                  color: isActive ? "#8B5CF6" : "rgba(255,255,255,0.35)",
-                }}
-              />
-              <span
-                className="text-xs flex-1 truncate"
-                style={{
-                  color: isActive
-                    ? "rgba(255,255,255,0.92)"
-                    : "rgba(255,255,255,0.5)",
-                }}
-              >
-                {conv.title}
-              </span>
+              <MessageSquare size={14} className="shrink-0" />
+              <span className="text-sm flex-1 truncate">{conv.title}</span>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onDelete(conv.id);
                 }}
-                className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0 rounded p-0.5 hover:text-red-400"
-                style={{ color: "rgba(255,255,255,0.3)" }}
-                aria-label="Delete conversation"
+                className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0 rounded p-1 hover:text-destructive"
               >
-                <Trash2 size={11} />
+                <Trash2 size={12} />
               </button>
             </div>
           );
@@ -773,13 +791,8 @@ export default function Sidebar({
       </div>
 
       {/* Footer */}
-      <div
-        className="px-4 py-3 border-t"
-        style={{ borderColor: "rgba(255,255,255,0.08)" }}
-      >
-        <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
-          Powered by OpenRouter
-        </p>
+      <div className="px-4 py-4 border-t border-sidebar-border">
+        <p className="text-xs text-muted-foreground">Powered by OpenRouter</p>
       </div>
     </aside>
   );
@@ -880,7 +893,8 @@ export function useAIStream() {
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
-      const chunk = decoder.decode(value);
+      
+      const chunk = decoder.decode(value, { stream: true });
       setOutput((prev) => prev + chunk);
     }
 
@@ -1024,111 +1038,133 @@ export function useChat() {
 ====================================================
 FILE: ./src/index.css
 ====================================================
-/* src/index.css */
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @layer base {
-  .theme {
-    --font-heading: var(--font-sans);
-    --font-sans: "Geist Variable", sans-serif;
-  }
-
-  /*
-   * Single dark theme — all variables set once on :root.
-   * Colors:
-   *   Background  #161D26  → oklch(0.14 0.018 240)
-   *   Sidebar     #1E2633  → oklch(0.19 0.022 240)
-   *   User bubble #3B82F6  → oklch(0.62 0.19  255)
-   *   Bot bubble  #222C3A  → oklch(0.22 0.022 240)
-   *   Accent      #8B5CF6  → oklch(0.59 0.22  285)
-   */
   :root {
-    --background: oklch(0.14 0.018 240);
-    --foreground: oklch(0.93 0 0);
+    /* Black & White Theme */
+    --background: #ffffff;
+    --foreground: #333333;
 
-    --card: oklch(0.22 0.022 240);
-    --card-foreground: oklch(0.93 0 0);
+    --card: #ffffff;
+    --card-foreground: #333333;
 
-    --popover: oklch(0.19 0.022 240);
-    --popover-foreground: oklch(0.93 0 0);
+    --popover: #ffffff;
+    --popover-foreground: #333333;
 
-    --primary: oklch(0.62 0.19 255);
-    --primary-foreground: oklch(0.98 0 0);
+    --primary: #333333;
+    --primary-foreground: #f4f4f4;
 
-    --secondary: oklch(0.19 0.022 240);
-    --secondary-foreground: oklch(0.85 0 0);
+    --secondary: #f4f4f4;
+    --secondary-foreground: #333333;
 
-    --muted: oklch(0.19 0.022 240);
-    --muted-foreground: oklch(0.55 0 0);
+    --muted: #eaeaea;
+    --muted-foreground: #848484;
 
-    --accent: oklch(0.59 0.22 285);
-    --accent-foreground: oklch(0.98 0 0);
+    --accent: #c1c1c1;
+    --accent-foreground: #333333;
 
-    --destructive: oklch(0.704 0.191 22.216);
+    --destructive: #ff4444;
+    --destructive-foreground: #ffffff;
 
-    --border: oklch(1 0 0 / 8%);
-    --input: oklch(1 0 0 / 10%);
-    --ring: oklch(0.59 0.22 285);
+    --border: #eaeaea;
+    --input: #f4f4f4;
+    --ring: #c1c1c1;
 
-    --radius: 0.625rem;
+    --radius: 0.75rem;
 
-    /* Sidebar tokens */
-    --sidebar: oklch(0.19 0.022 240);
-    --sidebar-foreground: oklch(0.85 0 0);
-    --sidebar-primary: oklch(0.59 0.22 285);
-    --sidebar-primary-foreground: oklch(0.98 0 0);
-    --sidebar-accent: oklch(1 0 0 / 6%);
-    --sidebar-accent-foreground: oklch(0.93 0 0);
-    --sidebar-border: oklch(1 0 0 / 8%);
-    --sidebar-ring: oklch(0.59 0.22 285);
+    /* Sidebar */
+    --sidebar: #f4f4f4;
+    --sidebar-foreground: #333333;
+    --sidebar-primary: #333333;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #eaeaea;
+    --sidebar-accent-foreground: #333333;
+    --sidebar-border: #eaeaea;
+    --sidebar-ring: #c1c1c1;
   }
 
+  .dark {
+    --background: #333333;
+    --foreground: #f4f4f4;
+
+    --card: #333333;
+    --card-foreground: #f4f4f4;
+
+    --popover: #333333;
+    --popover-foreground: #f4f4f4;
+
+    --primary: #f4f4f4;
+    --primary-foreground: #333333;
+
+    --secondary: #848484;
+    --secondary-foreground: #f4f4f4;
+
+    --muted: #848484;
+    --muted-foreground: #c1c1c1;
+
+    --accent: #c1c1c1;
+    --accent-foreground: #333333;
+
+    --border: #848484;
+    --input: #848484;
+    --ring: #c1c1c1;
+
+    --sidebar: #2a2a2a;
+    --sidebar-foreground: #f4f4f4;
+    --sidebar-primary: #f4f4f4;
+    --sidebar-primary-foreground: #333333;
+    --sidebar-accent: #3a3a3a;
+    --sidebar-accent-foreground: #f4f4f4;
+    --sidebar-border: #3a3a3a;
+    --sidebar-ring: #c1c1c1;
+  }
+}
+
+@layer base {
   * {
-    @apply border outline;
-    border-color: var(--border);
-    outline-color: var(--ring);
     box-sizing: border-box;
   }
 
-  html {
-    font-family: var(--font-sans);
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans, "Geist Variable", sans-serif);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
     height: 100%;
   }
-
-  body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  height: 100%;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 
   #root {
-    height: 100%;
+    height: 100vh;
   }
+}
 
-  /* Scrollbar */
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: oklch(1 0 0 / 12%);
-    border-radius: 99px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: oklch(1 0 0 / 20%);
-  }
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
 
-  /* Textarea auto-resize helper */
-  textarea {
-    field-sizing: content;
-  }
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ring);
 }
 
 ====================================================
@@ -1181,7 +1217,6 @@ export default function ChatPage() {
 
   const bottomRef = useRef(null);
 
-  // Auto-scroll to bottom on new messages or streaming updates
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [activeConversation?.messages?.length, streamingOutput]);
@@ -1190,10 +1225,7 @@ export default function ChatPage() {
   const isEmpty = messages.length === 0 && !isStreaming;
 
   return (
-    <div
-      className="flex h-full overflow-hidden"
-      style={{ background: "#161D26" }}
-    >
+    <div className="flex h-full bg-background">
       <Sidebar
         conversations={conversations}
         activeId={activeId}
@@ -1204,25 +1236,19 @@ export default function ChatPage() {
 
       <main className="flex flex-col flex-1 min-w-0 overflow-hidden">
         {/* Header */}
-        <div
-          className="flex items-center gap-3 px-6 py-4 border-b shrink-0"
-          style={{ borderColor: "rgba(255,255,255,0.08)" }}
-        >
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
-            style={{ background: "#222C3A" }}
-          >
-            <Bot size={16} style={{ color: "#8B5CF6" }} />
+        <div className="flex items-center gap-3 px-6 py-4 border-b bg-background shrink-0">
+          <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+            <Bot size={16} className="text-secondary-foreground" />
           </div>
           <div className="min-w-0">
-            <p className="text-sm font-semibold text-white truncate">
+            <p className="text-sm font-semibold text-foreground truncate">
               {activeConversation?.title ?? "New Chat"}
             </p>
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
+            <p className="text-xs text-muted-foreground">
               {isStreaming ? (
-                <span style={{ color: "#8B5CF6" }}>Typing…</span>
+                <span className="text-primary">Typing…</span>
               ) : (
-                "OpenRouter · llama-3.1-8b-instruct"
+                "OpenRouter · AI"
               )}
             </p>
           </div>
@@ -1230,33 +1256,24 @@ export default function ChatPage() {
 
         {/* Message list */}
         <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4">
-          {/* Empty state */}
           {isEmpty && (
-            <div className="flex flex-col items-center justify-center h-full text-center select-none">
-              <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"
-                style={{ background: "rgba(139,92,246,0.12)" }}
-              >
-                <Bot size={30} style={{ color: "#8B5CF6" }} />
+            <div className="flex flex-col items-center justify-center h-full text-center">
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+                <Bot size={30} className="text-primary" />
               </div>
-              <h2 className="text-lg font-semibold text-white mb-1">
+              <h2 className="text-xl font-semibold text-foreground mb-2">
                 How can I help?
               </h2>
-              <p
-                className="text-sm max-w-xs"
-                style={{ color: "rgba(255,255,255,0.35)" }}
-              >
+              <p className="text-sm text-muted-foreground max-w-md">
                 Ask anything. Start a conversation below.
               </p>
             </div>
           )}
 
-          {/* Committed messages */}
           {messages.map((msg, i) => (
             <MessageBubble key={i} role={msg.role} content={msg.content} />
           ))}
 
-          {/* Live streaming bubble */}
           {isStreaming && streamingOutput && (
             <MessageBubble
               role="assistant"
@@ -1265,7 +1282,6 @@ export default function ChatPage() {
             />
           )}
 
-          {/* Scroll anchor */}
           <div ref={bottomRef} />
         </div>
 
@@ -1280,9 +1296,57 @@ FILE: ./tailwind.config.js
 ====================================================
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{html,js}"],
+  darkMode: ["class"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        border: "var(--border)",
+        input: "var(--input)",
+        ring: "var(--ring)",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        primary: {
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
+        },
+        secondary: {
+          DEFAULT: "var(--secondary)",
+          foreground: "var(--secondary-foreground)",
+        },
+        destructive: {
+          DEFAULT: "var(--destructive)",
+          foreground: "var(--destructive-foreground)",
+        },
+        muted: {
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
+        },
+        accent: {
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
+        },
+        card: {
+          DEFAULT: "var(--card)",
+          foreground: "var(--card-foreground)",
+        },
+        sidebar: {
+          DEFAULT: "var(--sidebar)",
+          foreground: "var(--sidebar-foreground)",
+          primary: "var(--sidebar-primary)",
+          "primary-foreground": "var(--sidebar-primary-foreground)",
+          accent: "var(--sidebar-accent)",
+          "accent-foreground": "var(--sidebar-accent-foreground)",
+          border: "var(--sidebar-border)",
+          ring: "var(--sidebar-ring)",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+    },
   },
   plugins: [],
 };
@@ -1291,13 +1355,13 @@ export default {
 FILE: ./vite.config.js
 ====================================================
 import path from "path";
-import tailwindcss from "@tailwindcss/vite";
+// import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(),],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

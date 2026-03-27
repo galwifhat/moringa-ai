@@ -3,7 +3,7 @@
 #### Prompt #1
 
 **Prompt used:**
-```What is an API wrapper and what problems does it solve?```
+`What is an API wrapper and what problems does it solve?`
 
 **AI Response Summary:**
 
@@ -25,7 +25,9 @@ data = response.json()
 client = ExampleClient(api_key="sk-...")
 message = client.messages.create(model="gpt-4", content="Hello")
 ```
+
 Problems It Solves
+
 ```
 1. Reduces Boilerplate
 Raw API calls require repetitive setup — headers, base URLs, serialization, deserialization. A wrapper does all of that once, so every call in your codebase stays concise.
@@ -130,10 +132,13 @@ Response structure:
   "usage": { "prompt_tokens": 20, "completion_tokens": 10 }
 }
 ```
+
 ```
 **Streaming:** OpenRouter supports Server-Sent Events (SSE) — you'll need to handle chunked responses if you want real-time output.
 ```
+
 ---
+
 ```
 ### 6. **Good-to-Have Knowledge**
 
@@ -144,6 +149,7 @@ Response structure:
 
 ---
 ```
+
 ### Quick Readiness Checklist
 
 ```
@@ -173,8 +179,7 @@ I am not too familiar with streaming/sse
 #### Prompt #3
 
 **Prompt used:**
-```Show me 5 real-world applications that use API wrappers for AI services?```
-
+`Show me 5 real-world applications that use API wrappers for AI services?`
 
 **AI Response Summary:**
 
@@ -236,7 +241,7 @@ _no need to prompt this_
 #### Prompt #2(setup)
 
 **Prompt used:**
-```How can I improve the project structure of a Flask backend and ReactJS (Vite + Tailwind) frontend app that uses the OpenRouter API? Please suggest a scalable folder structure, best practices, and how to organize API calls.```
+`How can I improve the project structure of a Flask backend and ReactJS (Vite + Tailwind) frontend app that uses the OpenRouter API? Please suggest a scalable folder structure, best practices, and how to organize API calls.`
 
 **AI Response Summary:**
 
@@ -247,11 +252,129 @@ _no need to prompt this_
 **How it helped:**
 
 ```
-Helped me understand api versioning. 
+Helped me understand api versioning.
 ```
 
 **Challenges:**
 
 ```
 
+```
+
+### Phase 3 & 4 - Building and Debugging Prompts
+
+#### Prompt #1 (debug)
+
+Promt 1
+
+```
+“My AI chat integration isn’t returning responses. Please help me debug it.
+
+- Check how messages are being sent from the frontend.
+- Verify if the backend receives them correctly.
+- Confirm whether the AI model is receiving the messages and generating a response.
+- Identify any possible issues in request/response handling or configuration.”
+
+```
+
+**AI Response Summary:**
+
+```
+Claude traced the full request lifecycle across 4 layers:
+
+Layer 1 (Frontend): The send chain in useChat.js → useAIStream.js was
+correct. Messages were being built and fetched properly to
+POST /api/v1/ai/stream.
+
+Layer 2 (Backend): The Flask route and URL prefix matched the frontend
+call. However, CORS was missing the 127.0.0.1 origin even though the
+frontend .env pointed to 127.0.0.1:5000.
+
+Layer 3 (AI Connection): Two critical bugs were found in run.py and
+stream.py, load_dotenv() was never called, so OPENROUTER_API_KEY was
+always None. OpenRouter returned 401 Unauthorized on every request.
+
+Layer 4 (Streaming): A race condition in useChat.js could cause the final
+chunk of a streamed reply to be dropped before it was committed to state.
+```
+
+**How it helped:**
+
+```
+It pinpointed exactly why the chat appeared to "work" (200 OK was sent)
+but returned nothing — Flask sends response headers before the generator
+runs, so the 401 from OpenRouter happened silently mid-stream. Without
+this layer-by-layer trace, the empty response would have been very
+difficult to locate.
+```
+
+**Challenges:**
+
+```
+The 401 error was hidden because Flask's streaming response already
+committed a 200 OK before the generator crashed. The frontend had no
+visible error — the chat just silently did nothing. Also, the API key
+was accidentally exposed in the backend_dump.txt file shared during
+debugging.
+
+```
+
+**Solutions**
+
+```
+1. Added load_dotenv() to the top of run.py, before create_app() is called.
+2. Moved os.getenv("OPENROUTER_API_KEY") inside the stream function in
+   stream.py so it reads the key at call time, not import time.
+3. Added http://127.0.0.1:5173 to the CORS origins list in app/__init__.py.
+4. Fixed a race condition in useChat.js by tracking output in a ref that
+   updates independently of the loading state.
+5. Regenerated the OpenRouter API key after it was accidentally exposed
+   in a shared file, and added .env to .gitignore.
+```
+
+**Pitfall Encountered**
+Error Persisted
+
+```
+--- STARTING STREAM ---
+Key used: sk-or-v1-f...
+OpenRouter Status: 401
+CRITICAL ERROR: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+```
+
+The API consistently returned a 401 Unauthorized error, preventing responses from the AI.
+
+**Diagnosis**
+
+```Initially, the issue appeared to be related to an invalid or missing API key. However, further investigation showed that the request was reaching the API successfully.
+
+```
+
+**Resolution**
+
+```
+The issue was caused by using a restricted or unsupported chat model.
+Switching to a supported model resolved the 401 error.
+```
+
+**Backend Response**
+
+```
+--- STARTING STREAM ---
+Key used: sk-or-v1-e...
+OpenRouter Status: 200
+Yielding: That's wonderful to hear! 🌟
+127.0.0.1 - - [27/Mar/2026 05:20:27] "POST /api/v1/ai/stream HTTP/1.1" 200 -
+Yielding:  Taking pride in yourself—no matter how big or
+Yielding:  small the achievement—is such a meaningful step.
+Yielding:  Whatever you're proud of today, I hope it
+Yielding:  brings you a smile and fuels you for what's next
+Yielding: . Keep honoring your progress. You've got
+Yielding:  this! 💪✨
+
+
+Yielding: (And if you ever want to share what you
+Yielding: 're proud of—or just chat—I'm all ears
+Yielding: .) 😊
+--- STREAM FINISHED ---
 ```

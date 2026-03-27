@@ -57,5 +57,18 @@ Include all installation commands and a requirements.txt file"
 
 Prompt 2 (Structure):
 "What's the minimal project structure for a Flask + React app? Show me folder organization."
+
 Prompt 3 (Common Mistakes):
 "What common configuration mistakes should I avoid when setting up Flask with CORS for React?"
+
+
+### Phase 3 & 4 - Building and Debugging Prompts
+Promt 1
+
+“My AI chat integration isn’t returning responses. Please help me debug it.
+
+- Check how messages are being sent from the frontend.
+- Verify if the backend receives them correctly.
+- Confirm whether the AI model is receiving the messages and generating a response.
+- Identify any possible issues in request/response handling or configuration.”
+
