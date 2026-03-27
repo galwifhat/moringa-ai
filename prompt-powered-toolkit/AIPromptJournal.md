@@ -129,11 +129,11 @@ Response structure:
   "usage": { "prompt_tokens": 20, "completion_tokens": 10 }
 }
 ```
-
+```
 **Streaming:** OpenRouter supports Server-Sent Events (SSE) — you'll need to handle chunked responses if you want real-time output.
-
+```
 ---
-
+```
 ### 6. **Good-to-Have Knowledge**
 
 - **Retry logic** — handling `429 Rate Limited` and `5xx` server errors with exponential backoff
@@ -142,7 +142,7 @@ Response structure:
 - **OpenAI SDK familiarity** — since OpenRouter mirrors the OpenAI spec, reading the OpenAI docs is directly useful
 
 ---
-
+```
 ### Quick Readiness Checklist
 
 ```
