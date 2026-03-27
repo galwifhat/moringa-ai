@@ -219,13 +219,13 @@ User-Facing Output
 **How it helped:**
 
 ```
-
+With design thinking
 ```
 
 **Challenges:**
 
 ```
-
+None
 ```
 
 ### Phase 2: Setup
