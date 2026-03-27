@@ -172,7 +172,7 @@ I am not too familiar with streaming/sse
 #### Prompt #3
 
 **Prompt used:**
-`What is an API wrapper and what problems does it solve?`
+```Show me 5 real-world applications that use API wrappers for AI services?```
 **AI Response Summary:**
 
 ```
