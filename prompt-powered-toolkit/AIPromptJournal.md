@@ -174,6 +174,8 @@ I am not too familiar with streaming/sse
 
 **Prompt used:**
 ```Show me 5 real-world applications that use API wrappers for AI services?```
+
+
 **AI Response Summary:**
 
 ```
